@@ -52,8 +52,7 @@ app.get('/horarios', async (req, res) => {
 });
 
 app.get('/horarios/:numero_linha', async (req, res) => {
-    const numero = req.params.numero_linha;
-    const horario = await horarios.find({ numero });
+    const horario = await horarios.find({ numero_linha: req.params.numero_linha });
     res.send(horario);
 });
 
