@@ -1,12 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const username = 'marvynmesquita';
-const password = 'CLFO0XqbihFoaQF6';
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 const port = 3001;
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.k9b8wq0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
