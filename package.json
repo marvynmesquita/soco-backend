@@ -1,10 +1,10 @@
 {
   "name": "soco-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.cjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start": "node src/index.cjs"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +12,13 @@
   "description": "",
   "devDependencies": {
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.4.1"
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2",
+    "neo4j-driver": "^5.26.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@neo4j/graphql-ogm": "^5.9.1",
+    "soco-backend": "file:"
   }
 }
