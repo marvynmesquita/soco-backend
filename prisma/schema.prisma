@@ -1,0 +1,53 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Line {
+  id          String     @id @default(uuid())
+  number      String     @unique
+  origin      String
+  destination String
+
+  schedules Schedule[]
+  stops     Stop[]     @relation("LineStops")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Schedule {
+  id        String  @id @default(uuid())
+  time      String
+  direction String
+  notes     String?
+  dayType   DayType // O campo dayType está aqui, no lugar certo.
+
+  line   Line   @relation(fields: [lineId], references: [id], onDelete: Cascade)
+  lineId String
+}
+
+model Stop {
+  id           String  @id @default(uuid())
+  name         String
+  neighborhood String?
+  latitude     Float
+  longitude    Float
+
+  lines Line[] @relation("LineStops")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum DayType {
+  SEMANA
+  SABADO
+  DOMINGO
+}
