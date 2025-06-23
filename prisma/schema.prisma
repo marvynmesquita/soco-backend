@@ -5,18 +5,23 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Line {
-  id          String     @id @default(uuid())
-  number      String     @unique
+  id          String  @id @default(uuid())
+  number      String  @unique
   origin      String
   destination String
+  polyline    String? // Armazena a polyline do Google Maps para desenhar a rota
 
+  // A relação com as paradas agora é através da tabela de junção explícita
+  stops StopOnRoute[]
+
+  // Relação com os horários
   schedules Schedule[]
-  stops     Stop[]     @relation("LineStops")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -27,7 +32,7 @@ model Schedule {
   time      String
   direction String
   notes     String?
-  dayType   DayType // O campo dayType está aqui, no lugar certo.
+  dayType   DayType
 
   line   Line   @relation(fields: [lineId], references: [id], onDelete: Cascade)
   lineId String
@@ -40,10 +45,22 @@ model Stop {
   latitude     Float
   longitude    Float
 
-  lines Line[] @relation("LineStops")
+  // A relação com as linhas agora é através da tabela de junção explícita
+  lines StopOnRoute[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Tabela de junção para armazenar a ORDEM das paradas na linha
+model StopOnRoute {
+  line     Line @relation(fields: [lineId], references: [id], onDelete: Cascade)
+  lineId   String
+  stop     Stop @relation(fields: [stopId], references: [id], onDelete: Cascade)
+  stopId   String
+  sequence Int // A ordem da parada na rota (1, 2, 3...)
+
+  @@id([lineId, stopId])
 }
 
 enum DayType {

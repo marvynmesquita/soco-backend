@@ -1,14 +1,10 @@
-// src/services/geminiService.js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require('dotenv').config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function getArrivalPrediction({ line, distanceText, durationText, stopName, departureTime, currentTime }) {
-    // --- A CORREÇÃO FINAL ESTÁ AQUI ---
-    // Trocamos o modelo "gemini-pro" (antigo) pelo "gemini-1.5-flash-latest" (novo, rápido e eficiente).
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-    // --- FIM DA CORREÇÃO ---
 
     const prompt = `
     Aja como um especialista em logística de transporte público da cidade de Saquarema.

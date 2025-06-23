@@ -1,92 +1,93 @@
 // prisma/seed.js
 const { PrismaClient } = require('@prisma/client');
-const puppeteer = require('puppeteer');
 const { scrapeRioLagos } = require('../src/scrapers/rioLagosScraper');
-const { scrapeAllMoovitLineLinks, scrapeMoovitLineDetails } = require('../src/scrapers/moovitScraper');
+const { getTransitRoute } = require('../src/services/googleMapsService');
+const puppeteer = require('puppeteer');
+
 
 const prisma = new PrismaClient();
 
-function findMatchingMoovitLine(rioLagosLine, moovitLines) {
-    const cleanOrigin = rioLagosLine.origin.replace(/^\d+\s*-\s*/, '').trim();
-    const normalizedOrigin = cleanOrigin.toLowerCase();
-    const normalizedDestination = rioLagosLine.destination.toLowerCase();
-    const bestMatch = moovitLines.find(moovitLine => {
-        const moovitTitle = moovitLine.title.toLowerCase();
-        return moovitTitle.includes(normalizedOrigin) && moovitTitle.includes(normalizedDestination);
-    });
-    return bestMatch;
-}
-
 async function main() {
-    console.log('--- Iniciando o processo de Seeding (Schema Corrigido) ---');
+    console.log('--- Iniciando o processo de Seeding v2 (com Google Maps) ---');
     const browser = await puppeteer.launch({ headless: true });
-    
+
     try {
-        // Não precisamos mais resetar aqui, o `migrate reset` já fez isso.
         console.log('1. Coletando dados da Rio Lagos...');
         const rioLagosData = await scrapeRioLagos(browser);
-        
-        console.log('2. Coletando todos os links de linhas do Moovit...');
-        const moovitLineLinks = await scrapeAllMoovitLineLinks(browser);
+        if (rioLagosData.length === 0) {
+            console.error('Nenhuma linha encontrada na Rio Lagos. Abortando.');
+            return;
+        }
 
-        console.log('3. Cruzando dados e populando o banco...');
-        for (const lineInfo of rioLagosData) {
-            const matchingMoovitLine = findMatchingMoovitLine(lineInfo, moovitLineLinks);
+        const uniqueLines = rioLagosData.filter((line, index, self) =>
+            index === self.findIndex((l) => (
+                l.origin === line.origin && l.destination === line.destination
+            ))
+        );
 
-            if (matchingMoovitLine) {
-                console.log(`-> Match encontrado: [RioLagos] ${lineInfo.origin} X ${lineInfo.destination} -> [Moovit] ${matchingMoovitLine.title}`);
-                const moovitDetails = await scrapeMoovitLineDetails(matchingMoovitLine.url, browser);
+        console.log(`2. Encontradas ${uniqueLines.length} linhas únicas. Buscando rotas no Google Maps...`);
 
-                if (moovitDetails && moovitDetails.stops.length > 0 && moovitDetails.lineNumber !== 'N/A') {
-                    const validStops = moovitDetails.stops.filter(s => s.latitude && s.longitude);
-                    
-                    if (validStops.length > 0) {
-                        await prisma.$transaction(async (tx) => {
-                            // --- LÓGICA CORRIGIDA ---
-                            // Garante que a linha exista (cria se for a 1ª vez, ignora se já existir)
-                            const line = await tx.line.upsert({
-                                where: { number: moovitDetails.lineNumber },
-                                update: {}, // Não faz nada se a linha já existe
-                                create: {
-                                    number: moovitDetails.lineNumber,
-                                    origin: lineInfo.origin,
-                                    destination: lineInfo.destination,
-                                }
-                            });
-                            console.log(`   Linha ${line.number} garantida no banco.`);
+        for (const lineInfo of uniqueLines) {
+            // Pequena pausa para não sobrecarregar a API do Google
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const routeData = await getTransitRoute(`${lineInfo.origin}, Saquarema, RJ`, `${lineInfo.destination}, Saquarema, RJ`);
 
-                            // Adiciona os horários COM O TIPO DE DIA para a linha encontrada/criada
-                            await tx.schedule.createMany({
-                                data: lineInfo.schedules.map(s => ({
-                                    ...s,
-                                    dayType: lineInfo.dayType, // Adiciona o dayType ao horário
-                                    lineId: line.id
-                                })),
-                                skipDuplicates: true,
-                            });
-                            console.log(`     ${lineInfo.schedules.length} horários de ${lineInfo.dayType} adicionados.`);
+            if (routeData && routeData.stops.length > 0) {
+                console.log(` -> Rota encontrada para ${lineInfo.origin} X ${lineInfo.destination}. Salvando no banco...`);
+                
+                const lineNumberMatch = lineInfo.origin.match(/^\d+/);
+                const lineNumber = lineNumberMatch ? lineNumberMatch[0] : `${lineInfo.origin.slice(0, 3)}-${lineInfo.destination.slice(0, 3)}`;
 
-                            // Conecta as paradas à linha
-                            for (const stop of validStops) {
-                                const stopId = `${stop.latitude}_${stop.longitude}`;
-                                await tx.stop.upsert({
-                                    where: { id: stopId },
-                                    update: { lines: { connect: { id: line.id } } },
-                                    create: {
-                                        id: stopId,
-                                        name: stop.name,
-                                        latitude: stop.latitude,
-                                        longitude: stop.longitude,
-                                        lines: { connect: { id: line.id } }
-                                    }
-                                });
+                await prisma.$transaction(async (tx) => {
+                    const line = await tx.line.upsert({
+                        where: { number: lineNumber },
+                        update: { polyline: routeData.polyline },
+                        create: {
+                            number: lineNumber,
+                            origin: lineInfo.origin,
+                            destination: lineInfo.destination,
+                            polyline: routeData.polyline,
+                        }
+                    });
+
+                    for (const [index, stopData] of routeData.stops.entries()) {
+                        const stopId = `${stopData.latitude}_${stopData.longitude}`;
+                        const stop = await tx.stop.upsert({
+                            where: { id: stopId },
+                            update: {},
+                            create: {
+                                id: stopId,
+                                name: stopData.name,
+                                latitude: stopData.latitude,
+                                longitude: stopData.longitude,
                             }
-                             console.log(`     ${validStops.length} paradas conectadas.`);
-                        }, { timeout: 60000 });
+                        });
+
+                        await tx.stopOnRoute.upsert({
+                            where: { lineId_stopId: { lineId: line.id, stopId: stop.id } },
+                            update: { sequence: index + 1 },
+                            create: {
+                                lineId: line.id,
+                                stopId: stop.id,
+                                sequence: index + 1,
+                            }
+                        });
                     }
-                }
-            } else {
-                console.log(`-- Sem match no Moovit para: ${lineInfo.origin} X ${lineInfo.destination} (${lineInfo.dayType})`);
+
+                    const allSchedulesForThisLine = rioLagosData.filter(l => l.origin === lineInfo.origin && l.destination === lineInfo.destination);
+                    for (const scheduleInfo of allSchedulesForThisLine) {
+                         await tx.schedule.createMany({
+                            data: scheduleInfo.schedules.map(s => ({
+                                ...s,
+                                dayType: scheduleInfo.dayType,
+                                lineId: line.id
+                            })),
+                            skipDuplicates: true,
+                        });
+                    }
+                    console.log(`    Linha ${line.number} e suas ${routeData.stops.length} paradas foram salvas/atualizadas.`);
+                }, { timeout: 60000 });
             }
         }
     } catch (error) {
@@ -94,7 +95,7 @@ async function main() {
     } finally {
         await browser.close();
         await prisma.$disconnect();
-        console.log('--- Processo de Seeding Finalizado com Sucesso! ---');
+        console.log('--- Processo de Seeding Finalizado! ---');
     }
 }
 

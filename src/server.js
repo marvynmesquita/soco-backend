@@ -7,17 +7,20 @@ const cors = require('cors');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+// No Heroku/Render, devemos usar a variável process.env.PORT.
+// Se ela não existir (ambiente local), usamos a 3001 como padrão.
+const PORT = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Backend tamoios está no ar!');
+    res.send('API do Clone do Moovit está no ar!');
 });
 
 app.use('/api', busRoutes);
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });

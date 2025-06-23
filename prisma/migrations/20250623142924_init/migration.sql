@@ -7,7 +7,7 @@ CREATE TABLE "Line" (
     "number" TEXT NOT NULL,
     "origin" TEXT NOT NULL,
     "destination" TEXT NOT NULL,
-    "dayType" "DayType" NOT NULL,
+    "polyline" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -20,6 +20,7 @@ CREATE TABLE "Schedule" (
     "time" TEXT NOT NULL,
     "direction" TEXT NOT NULL,
     "notes" TEXT,
+    "dayType" "DayType" NOT NULL,
     "lineId" TEXT NOT NULL,
 
     CONSTRAINT "Schedule_pkey" PRIMARY KEY ("id")
@@ -39,24 +40,22 @@ CREATE TABLE "Stop" (
 );
 
 -- CreateTable
-CREATE TABLE "_LineStops" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL,
+CREATE TABLE "StopOnRoute" (
+    "lineId" TEXT NOT NULL,
+    "stopId" TEXT NOT NULL,
+    "sequence" INTEGER NOT NULL,
 
-    CONSTRAINT "_LineStops_AB_pkey" PRIMARY KEY ("A","B")
+    CONSTRAINT "StopOnRoute_pkey" PRIMARY KEY ("lineId","stopId")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Line_number_key" ON "Line"("number");
 
--- CreateIndex
-CREATE INDEX "_LineStops_B_index" ON "_LineStops"("B");
-
 -- AddForeignKey
 ALTER TABLE "Schedule" ADD CONSTRAINT "Schedule_lineId_fkey" FOREIGN KEY ("lineId") REFERENCES "Line"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_LineStops" ADD CONSTRAINT "_LineStops_A_fkey" FOREIGN KEY ("A") REFERENCES "Line"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "StopOnRoute" ADD CONSTRAINT "StopOnRoute_lineId_fkey" FOREIGN KEY ("lineId") REFERENCES "Line"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_LineStops" ADD CONSTRAINT "_LineStops_B_fkey" FOREIGN KEY ("B") REFERENCES "Stop"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "StopOnRoute" ADD CONSTRAINT "StopOnRoute_stopId_fkey" FOREIGN KEY ("stopId") REFERENCES "Stop"("id") ON DELETE CASCADE ON UPDATE CASCADE;

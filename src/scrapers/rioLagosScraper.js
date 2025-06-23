@@ -1,7 +1,6 @@
 // src/scrapers/rioLagosScraper.js
 const cheerio = require('cheerio');
 
-// ... (o array de urls continua o mesmo) ...
 const urls = {
     SEMANA: "https://www.riolagostransportes.com.br/segunda-%C3%A0-sexta",
     SABADO: "https://www.riolagostransportes.com.br/sabados",
@@ -37,11 +36,9 @@ async function scrapePage(browser, url, dayType) {
                     allLinesOnPage.push(currentLine);
                 }
                 
-                // --- AJUSTE AQUI PARA LIMPAR OS NOMES ---
                 const [rawOrigin, rawDestination] = h1Text.split(' X ');
                 const origin = rawOrigin.replace(/^\d+\s*-\s*/, '').trim().toUpperCase();
                 const destination = rawDestination.replace(/^\d+\s*-\s*/, '').trim().toUpperCase();
-                // --- FIM DO AJUSTE ---
 
                 currentLine = { origin, destination, dayType, schedules: [] };
                 console.log(`    Iniciando nova linha: ${origin} X ${destination}`);
@@ -82,11 +79,9 @@ async function scrapePage(browser, url, dayType) {
     }
 }
 
-// ... (o resto do arquivo continua o mesmo) ...
 async function scrapeRioLagos(browser) {
-    console.log('Iniciando scraper da Rio Lagos com lógica final (sem iframe)...');
+    console.log('Iniciando scraper da Rio Lagos...');
     let allLines = [];
-
     for (const [dayType, url] of Object.entries(urls)) {
         try {
             console.log(`- Fazendo scraping dos horários de: ${dayType}`);
