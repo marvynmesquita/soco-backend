@@ -1,4 +1,3 @@
-// src/scrapers/rioLagosScraper.js
 const cheerio = require('cheerio');
 
 const urls = {
@@ -10,70 +9,58 @@ const urls = {
 async function scrapePage(browser, url, dayType) {
     const page = await browser.newPage();
     try {
-        console.log(`  Navegando para: ${url}`);
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
-
+        await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
         const contentSelector = 'div[data-testid="richTextElement"]';
-        console.log(`  Aguardando pelo conteúdo final (seletor: ${contentSelector})...`);
         await page.waitForSelector(contentSelector, { timeout: 30000 });
-        console.log(`  Conteúdo final detectado na página principal.`);
-        
         const content = await page.content();
         const $ = cheerio.load(content);
+        const pageLines = [];
+        let currentLineData = null;
 
-        const allLinesOnPage = [];
-        let currentLine = null;
-        let currentDirection = '';
-
-        const infoBlocks = $('div[data-testid="richTextElement"]');
-
-        infoBlocks.each((index, block) => {
+        $('div[data-testid="richTextElement"]').each((index, block) => {
             const h1Text = $(block).find('h1').text().trim();
             const pElements = $(block).find('p');
 
             if (h1Text && h1Text.includes(' X ')) {
-                if (currentLine && currentLine.schedules.length > 0) {
-                    allLinesOnPage.push(currentLine);
-                }
+                if (currentLineData) pageLines.push(currentLineData);
                 
                 const [rawOrigin, rawDestination] = h1Text.split(' X ');
-                const origin = rawOrigin.replace(/^\d+\s*-\s*/, '').trim().toUpperCase();
-                const destination = rawDestination.replace(/^\d+\s*-\s*/, '').trim().toUpperCase();
-
-                currentLine = { origin, destination, dayType, schedules: [] };
-                console.log(`    Iniciando nova linha: ${origin} X ${destination}`);
-            }
-            else if (h1Text && h1Text.includes(' P/ ')) {
-                currentDirection = h1Text;
-                console.log(`      Definindo sentido: ${currentDirection}`);
-            }
-            else if (pElements.length > 0 && currentLine) {
+                currentLineData = {
+                    origin: rawOrigin.trim().toUpperCase(),
+                    destination: rawDestination.trim().toUpperCase(),
+                    dayType,
+                    schedules: []
+                };
+            } 
+            else if (pElements.length > 0 && currentLineData) {
+                let currentDirection = '';
                 pElements.each((i, p) => {
-                    const fullText = $(p).text().trim().replace(/\u00A0/g, ' ');
-                    const timeMatch = fullText.match(/(\d{1,2}:\d{2})/);
-                    
-                    if (timeMatch) {
-                        let formattedTime = timeMatch[0];
-                        if (formattedTime.length === 4) formattedTime = '0' + formattedTime;
+                    const lineText = $(p).text().trim();
+                    if (!lineText) return;
+
+                    if (lineText.toLowerCase().startsWith('saídas de')) {
+                        currentDirection = lineText;
+                    } else {
+                        const lineNumberMatch = lineText.match(/LINHA\s*(\w+):/i);
+                        const lineNumber = lineNumberMatch ? lineNumberMatch[1] : null;
                         
-                        const notes = fullText.includes('VIA') ? fullText.substring(fullText.indexOf('VIA')) : null;
-                        
-                        currentLine.schedules.push({
-                            time: formattedTime,
-                            direction: currentDirection,
-                            notes: notes,
+                        const times = lineText.split(/ – | - | /).map(t => t.trim());
+                        times.forEach(timeSegment => {
+                            const cleanTime = timeSegment.match(/(\d{1,2}:\d{2})/);
+                            if (cleanTime) {
+                                let formattedTime = cleanTime[0];
+                                if (formattedTime.length === 4) formattedTime = '0' + formattedTime;
+                                const notes = timeSegment.includes('VIA') ? timeSegment.substring(timeSegment.indexOf('VIA')) : null;
+                                currentLineData.schedules.push({ time: formattedTime, direction: currentDirection, notes, lineNumber });
+                            }
                         });
                     }
                 });
             }
         });
         
-        if (currentLine && currentLine.schedules.length > 0) {
-            allLinesOnPage.push(currentLine);
-        }
-
-        return allLinesOnPage;
-
+        if (currentLineData) pageLines.push(currentLineData);
+        return pageLines;
     } finally {
         await page.close();
     }
@@ -83,15 +70,10 @@ async function scrapeRioLagos(browser) {
     console.log('Iniciando scraper da Rio Lagos...');
     let allLines = [];
     for (const [dayType, url] of Object.entries(urls)) {
-        try {
-            console.log(`- Fazendo scraping dos horários de: ${dayType}`);
-            const linesFromPage = await scrapePage(browser, url, dayType);
-            allLines = allLines.concat(linesFromPage);
-        } catch (error) {
-            console.error(`  Erro ao fazer scraping da URL de ${dayType}: ${error.message}`);
-        }
+        console.log(`- Fazendo scraping dos horários de: ${dayType}`);
+        const linesFromPage = await scrapePage(browser, url, dayType);
+        allLines.push(...linesFromPage);
     }
-    
     console.log(`Scraper da Rio Lagos finalizado. ${allLines.length} registros de linhas/dias encontrados.`);
     return allLines;
 }

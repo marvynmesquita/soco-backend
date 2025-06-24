@@ -1,0 +1,3502 @@
+{
+    "results": [
+      {
+        "result": {
+          "tripPlanSections": {
+            "tripPlanSections": [
+              {
+                "name": "Táxi e transporte privado",
+                "sectionId": 1561,
+                "maxItemsToDisplay": 1,
+                "sectionType": 1
+              },
+              {
+                "name": "Rotas sugeridas",
+                "sectionId": 1,
+                "maxItemsToDisplay": 2,
+                "sectionType": 16
+              },
+              {
+                "name": "Táxi e transporte privado",
+                "sectionId": 1581,
+                "maxItemsToDisplay": 1,
+                "sectionType": 1
+              },
+              {
+                "name": "Apenas linhas municipais do Rio",
+                "sectionId": 582,
+                "maxItemsToDisplay": 1,
+                "sectionType": 1
+              },
+              {
+                "name": "Apenas rotas com Frescão",
+                "sectionId": 581,
+                "maxItemsToDisplay": 1,
+                "sectionType": 1
+              },
+              {
+                "name": "Rotas com transporte e bicicleta compartilhada",
+                "sectionId": 541,
+                "maxItemsToDisplay": 1,
+                "sectionType": 7
+              },
+              {
+                "name": "Mobilidade compartilhada",
+                "sectionId": 901,
+                "sectionType": 11
+              },
+              {
+                "name": "Rotas a pé e de bicicleta",
+                "sectionId": 521,
+                "maxItemsToDisplay": 3,
+                "sectionType": 2
+              }
+            ],
+            "isOtpRt": 0
+          }
+        }
+      },
+      {
+        "result": {
+          "itinerary": {
+            "guid": "202506245B6D9AABE06C4A2C8210EDBA5C8E9E14:0",
+            "sectionId": 1,
+            "groupType": 1,
+            "groupKey": "1",
+            "legs": [
+              {
+                "waitToMultiLineLeg": {
+                  "time": {
+                    "startTimeUtc": 1750779000000,
+                    "endTimeUtc": 1750779000000,
+                    "isRealTime": 0,
+                    "staticStartTimeUtc": 1750779000000,
+                    "staticEndTimeUtc": 1750779000000
+                  },
+                  "waitAtStopId": 35688125,
+                  "departOnStopId": 35849425,
+                  "multiLinesImage": {
+                    "imageId": -126,
+                    "parameters": [
+                      "0",
+                      "0",
+                      "ff0061a5",
+                      "-61",
+                      "20",
+                      "",
+                      "",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "text",
+                      "0",
+                      "21",
+                      "292a30",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000",
+                      "image",
+                      "0",
+                      "",
+                      "00000000"
+                    ]
+                  },
+                  "alternatives": [
+                    {
+                      "time": {
+                        "startTimeUtc": 1750779000000,
+                        "endTimeUtc": 1750779000000,
+                        "isRealTime": 0,
+                        "staticStartTimeUtc": 1750779000000,
+                        "staticEndTimeUtc": 1750779000000
+                      },
+                      "waitToLineId": 3245615,
+                      "futureDepartureTimes": {
+                        "epochDay": 20263,
+                        "futureDepartures": [
+                          {
+                            "patternId": 3710678,
+                            "tripId": 1150702209,
+                            "staticEtdUTC": 1750779000000,
+                            "isLastArrival": 0,
+                            "stopIndex": 0,
+                            "patternStopsSize": 61,
+                            "stopEmbarkation": {
+                              "pickup": 1,
+                              "dropoff": 2
+                            }
+                          },
+                          {
+                            "patternId": 3710678,
+                            "tripId": 1150702210,
+                            "staticEtdUTC": 1750788000000,
+                            "isLastArrival": 0,
+                            "stopIndex": 0,
+                            "patternStopsSize": 61,
+                            "stopEmbarkation": {
+                              "pickup": 1,
+                              "dropoff": 2
+                            }
+                          }
+                        ]
+                      },
+                      "waitOnVehicle": 0
+                    }
+                  ],
+                  "primaryAlternativeIndex": 0,
+                  "metroId": 322,
+                  "waitAtChildStopId": 35688125,
+                  "departOnChildStopId": 35849425
+                }
+              },
+              {
+                "lineWithAlternativesLeg": {
+                  "alternativeLines": [
+                    {
+                      "time": {
+                        "startTimeUtc": 1750779000000,
+                        "endTimeUtc": 1750782328000,
+                        "isRealTime": 0,
+                        "staticStartTimeUtc": 1750779000000,
+                        "staticEndTimeUtc": 1750782328000
+                      },
+                      "lineId": 3245615,
+                      "stopSequenceIds": [
+                        35688125,
+                        35688196,
+                        35688907,
+                        35688195,
+                        35688902,
+                        35688903,
+                        35688904,
+                        335762996,
+                        35688191,
+                        35688905,
+                        321114520,
+                        321114532,
+                        35688906,
+                        35688187,
+                        35688147,
+                        321114581,
+                        36178037,
+                        35688149,
+                        328642020,
+                        321117837,
+                        35688351,
+                        35689133,
+                        35689136,
+                        35689137,
+                        35689139,
+                        35689142,
+                        35689144,
+                        35689145,
+                        35689147,
+                        35689131,
+                        35689150,
+                        35689153,
+                        35689154,
+                        35689156,
+                        35689158,
+                        35689161,
+                        35849387,
+                        35849389,
+                        35849391,
+                        35849392,
+                        35849393,
+                        35849394,
+                        35849395,
+                        35849396,
+                        35849397,
+                        35849398,
+                        35849399,
+                        35689128,
+                        35849401,
+                        35849403,
+                        35849405,
+                        35849407,
+                        35849409,
+                        35849412,
+                        35849413,
+                        35849416,
+                        35849417,
+                        35849419,
+                        35849421,
+                        35849423,
+                        35849425
+                      ],
+                      "shape": {
+                        "distanceInMeters": 22849.585052299957,
+                        "polyline": "dpvjCdzebGGBCTnC~Eb@p@d@hAR^p@xB??z@pC^dAt@bAh@^DB??RJn@Xp@Jn@Fx@?jBGxABnALrCZ?C~Ej@bAH??zAN~Ef@@?RBrBRfCTdAJF@??xEb@lD\\lDXpAJ??n@FvAJ`Ir@??`@DxCZvJt@??RBjFj@`AF?@zDZrGd@??bBLjANx@PxAr@h@`@f@f@PT|@hBl@~A@AhBxD`@v@t@v@fBv@~Bt@pAj@x@p@??^\\f@l@l@nBb@l@v@T`A@fADn@LZPXZjAdBl@z@b@j@T\\??~AxBf@t@r@bA^f@rAjBvA|A??d@h@r@j@lC|Bf@b@bB|At@p@??vApA\\`@R`@|BvFA?zCpHz@~Bb@bBdAfGNn@C?GBQb@SPkA^??IDc@Zi@Tk@^i@d@c@d@[d@Uh@S`@Mr@?nABl@??Fr@VdCBdASz@\\R`Bp@n@NpAf@fB\\??f@JPNBT?d@y@|BwAnE[R]PUR]h@oChFS^??qCxF??mCtF}BbFCT?VBVbBdLUH_@j@GN??e@zAAt@?v@aC@}Hj@yBZC???{B~@sEdC_BC??cBAm@?_@I[ICCECE?KBGL?DI~@k@lD_@tCcAzGO^S\\u@x@i@f@e@j@k@nA{@rCaBlG_@bAi@e@??e@a@aE}DKSQaAc@oAkBaD{@gA??mAuAc@u@M[Sy@DiAAsAu@_CIcCGc@YgA_@q@i@c@i@Wg@Ma@G]?]FsCpAs@Ta@EoAc@??aEyA_A[u@i@GbACj@Oj@QVOJq@^??_Aj@aBdAcAdAOV??IP|C|DjAjA??dBfB`@d@??LNJTNfEDf@|@|BTt@Jp@Dv@?l@CpA??Y|EInB[xCM~AAt@FtBAzAMf@??CRYFg@Hi@?mBM]Gg@Ag@@[JaAr@[p@Yz@ChBBn@Rz@Nr@Fp@Bl@Cv@In@M^]d@SHWBc@G}B{@i@Ia@C_@?WDqAVu@DcDU_ADu@H[LiBdAcAf@_@H{@B_AIsK_BuO}B}Ba@YM]Ww@}@gBqC[[i@Q??sAOeAI_ASu@Y_AYy@_@mJuDe@Ke@Ak@Fq@RwA~@??MNOd@Sl@In@GbADnDHrEMjAc@fBaAtDi@fB??CNu@dA}@r@eB|@c@HQA??Y?aBUmAWcA[wLiGq@O[CyBAw@Ik@SgCwAi@MeAGgCA??wCA_CNg@J{@n@WVM\\OfACxANjBVpA??tBdITrAFbBGx@]bAo@~@o@n@{@d@gAd@_@T[V_@`@i@b@a@T??OLKD\\j@tBnC|@z@fAp@fB`AbAb@jAh@f@J~@BvBGx@E`@FbD|Bv@l@V`@j@dAtBfClClD??hClDnB~Cn@z@lBrCl@v@LJ??BB\\Nj@JtD^rB\\??jFdAv@PVB??dAPlAL`AFz@BpAAb@C^OV[h@aAZUXK^I`@?\\B|@\\rAh@\\FvAG??r@CbHd@fANnAj@n@\\XZ?@??V`A\\jAz@pAnCpC??|EpE??bC`C~@hAf@f@??pAfAhChB??LHT\\LVd@t@`@h@nB`B??@?xBjBl@t@fAtCDB??TRlEXxCF`@INI??JG?Qh@mBt@sBLk@PqARmA??`AeG@C??VYVIrBSz@U??n@e@fCyC??@?f@[\\CtACbAItCm@jCUb@Ad@ItAY`@Cn@???hADbBXdAZvAf@p@\\\\JVTXHVBFG"
+                      },
+                      "legFare": {
+                        "price": {
+                          "balance": 580,
+                          "currencyId": 33,
+                          "currencySymbol": "R$",
+                          "currencyCode": "BRL"
+                        },
+                        "payForThisLeg": 1,
+                        "fares": [
+                          {
+                            "fareId": 7273725,
+                            "balance": 580,
+                            "payForThisLeg": 1,
+                            "paymentMethod": 0,
+                            "usage": 1
+                          }
+                        ]
+                      },
+                      "tripId": 1150702209,
+                      "metroId": 322,
+                      "childStopSequenceIds": [
+                        35688125,
+                        35688196,
+                        35688907,
+                        35688195,
+                        35688902,
+                        35688903,
+                        35688904,
+                        35688192,
+                        35688191,
+                        35688905,
+                        35688143,
+                        35688144,
+                        35688906,
+                        35688187,
+                        35688147,
+                        35688184,
+                        35688148,
+                        35688149,
+                        35688153,
+                        35688151,
+                        35688351,
+                        35689133,
+                        35689136,
+                        35689137,
+                        35689139,
+                        35689142,
+                        35689144,
+                        35689145,
+                        35689147,
+                        35689131,
+                        35689150,
+                        35689153,
+                        35689154,
+                        35689156,
+                        35689158,
+                        35689161,
+                        35849387,
+                        35849389,
+                        35849391,
+                        35849392,
+                        35849393,
+                        35849394,
+                        35849395,
+                        35849396,
+                        35849397,
+                        35849398,
+                        35849399,
+                        35689128,
+                        35849401,
+                        35849403,
+                        35849405,
+                        35849407,
+                        35849409,
+                        35849412,
+                        35849413,
+                        35849416,
+                        35849417,
+                        35849419,
+                        35849421,
+                        35849423,
+                        35849425
+                      ]
+                    }
+                  ],
+                  "primaryAlternativeIndex": 0
+                }
+              }
+            ],
+            "hasPrev": 0,
+            "hasNext": 1,
+            "relevantForRealtime": 0,
+            "isAccessible": 0,
+            "itineraryFare": {
+              "price": {
+                "balance": 580,
+                "currencyId": 33,
+                "currencySymbol": "R$",
+                "currencyCode": "BRL"
+              },
+              "partial": 0
+            },
+            "hasSecondaryArrivalItinerary": 0,
+            "sectionName": "Rotas sugeridas",
+            "serverContext": "{\"sectionRequestId\":1,\"tripPlanProfile\":\"Fastest\",\"timeTargetTimestamp\":1750773886353,\"sectionId\":1}"
+          }
+        },
+        "supplementalData": {
+          "lineGroupSummaryList": [
+            {
+              "groupId": 742712,
+              "lineNumber": "21",
+              "agencyId": 1186896,
+              "color": -16752219,
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 4,
+                    "imageRef": -20
+                  },
+                  {
+                    "index": 2,
+                    "imageRef": -19
+                  },
+                  {
+                    "index": 3,
+                    "imageRef": -20
+                  }
+                ]
+              },
+              "lineSummaries": [
+                {
+                  "lineId": 3245615,
+                  "destination": "Mombaça",
+                  "routeLongName": "Bacaxá - Mombaça"
+                },
+                {
+                  "lineId": 3245616,
+                  "destination": "Bacaxá",
+                  "routeLongName": "Bacaxá - Mombaça"
+                }
+              ],
+              "innerImageIds": {
+                "images": [
+                  {
+                    "index": 4,
+                    "image": -61
+                  },
+                  {
+                    "index": 3,
+                    "image": -61
+                  }
+                ]
+              },
+              "caption1": "Bacaxá - Mombaça",
+              "caption2": "21 Bacaxá - Mombaça",
+              "type": 1
+            }
+          ],
+          "mVStopSyncedMetaDataList": [
+            {
+              "stopId": 321114532,
+              "stopName": "Estrada Do Palmital, 2665",
+              "stopLocation": {
+                "latitude": -22916936,
+                "longitude": -42477254
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    5990779,
+                    3342775,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3342781,
+                    3245599,
+                    6311407,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849387,
+              "stopName": "Rua Eduardo Galaxe, 100",
+              "stopLocation": {
+                "latitude": -22891871,
+                "longitude": -42524140
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689128,
+              "stopName": "Estrada Da Mombaça, 1337",
+              "stopLocation": {
+                "latitude": -22899048,
+                "longitude": -42545131
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689131,
+              "stopName": "Estrada Do Saco, 2a",
+              "stopLocation": {
+                "latitude": -22910887,
+                "longitude": -42512895
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849391,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22889498,
+                "longitude": -42530438
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689133,
+              "stopName": "Avenida Oito De Maio, 691",
+              "stopLocation": {
+                "latitude": -22930671,
+                "longitude": -42504026
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849389,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22890803,
+                "longitude": -42529515
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689136,
+              "stopName": "Avenida Oito De Maio, 547",
+              "stopLocation": {
+                "latitude": -22929939,
+                "longitude": -42505277
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849395,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22885850,
+                "longitude": -42540630
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689137,
+              "stopName": "Travessa Lagoinha, 230-320",
+              "stopLocation": {
+                "latitude": -22928763,
+                "longitude": -42510449
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849394,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22879059,
+                "longitude": -42535212
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849393,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22880394,
+                "longitude": -42530513
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689139,
+              "stopName": "Rua João Vasconcelos, 749-987",
+              "stopLocation": {
+                "latitude": -22925740,
+                "longitude": -42511797
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849392,
+              "stopName": "Rua Coronel Joao Catarino De Souza, 6544",
+              "stopLocation": {
+                "latitude": -22882520,
+                "longitude": -42527938
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849399,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22896244,
+                "longitude": -42544393
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849398,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22891724,
+                "longitude": -42544549
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689142,
+              "stopName": "Estrada Do Girau, 591",
+              "stopLocation": {
+                "latitude": -22923604,
+                "longitude": -42512761
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245602,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849397,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22890141,
+                "longitude": -42544114
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849396,
+              "stopName": "Estr. Aleixo Machado",
+              "stopLocation": {
+                "latitude": -22888232,
+                "longitude": -42543667
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689144,
+              "stopName": "Estrada De Santo Antonio, 1902",
+              "stopLocation": {
+                "latitude": -22919440,
+                "longitude": -42519767
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849403,
+              "stopName": "Estrada Da Mombaça, 974",
+              "stopLocation": {
+                "latitude": -22901432,
+                "longitude": -42548096
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689145,
+              "stopName": "Estrada De Santo Antonio, 1900",
+              "stopLocation": {
+                "latitude": -22917117,
+                "longitude": -42516651
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849401,
+              "stopName": "Estrada Da Mombaça, 990",
+              "stopLocation": {
+                "latitude": -22900348,
+                "longitude": -42547003
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689147,
+              "stopName": "Rua Santo Antonio, 666",
+              "stopLocation": {
+                "latitude": -22913081,
+                "longitude": -42512519
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849407,
+              "stopName": "Estrada Da Mombaça, 954",
+              "stopLocation": {
+                "latitude": -22903708,
+                "longitude": -42550218
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688125,
+              "stopName": "Ponto Final - Bacaxá (Horto)",
+              "stopLocation": {
+                "latitude": -22894261,
+                "longitude": -42469559
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245608,
+                    3245579,
+                    3245610,
+                    3245613,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689150,
+              "stopName": "Estrada Do Saco, 25",
+              "stopLocation": {
+                "latitude": -22909622,
+                "longitude": -42513946
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849405,
+              "stopName": "Estrada Da Mombaça, 954",
+              "stopLocation": {
+                "latitude": -22902619,
+                "longitude": -42549302
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688195,
+              "stopName": "Avenida Saquarema, 4597",
+              "stopLocation": {
+                "latitude": -22899846,
+                "longitude": -42474498
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245608,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688196,
+              "stopName": "Avenida Saquarema | Casa & Vídeo Bacaxá (Sentido Saquarema)",
+              "stopLocation": {
+                "latitude": -22895530,
+                "longitude": -42472338
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245608,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 321117837,
+              "stopName": "Ponto Final - Saquarema (Praça Do Bem-Estar)",
+              "stopLocation": {
+                "latitude": -22930551,
+                "longitude": -42497850
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245589,
+                    3342774,
+                    5990750,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245595,
+                    3342776,
+                    7608287,
+                    3245597,
+                    3245599,
+                    5778537,
+                    3892618,
+                    3342784,
+                    3245607,
+                    7379686,
+                    3245609,
+                    3245579,
+                    3245615,
+                    7591725
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 335762996,
+              "stopName": "Avenida Saquarema, 929",
+              "stopLocation": {
+                "latitude": -22908002,
+                "longitude": -42475789
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    5990779,
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3342781,
+                    3245599,
+                    6311407,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 321114520,
+              "stopName": "Avenida Saquarema, 3017",
+              "stopLocation": {
+                "latitude": -22914614,
+                "longitude": -42476912
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    5990779,
+                    3342775,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3342781,
+                    3245599,
+                    6311407,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688351,
+              "stopName": "Avenida Nossa Senhora De Nazareth, 15-39",
+              "stopLocation": {
+                "latitude": -22932456,
+                "longitude": -42500288
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3892618,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245595,
+                    3245597,
+                    3245599,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688187,
+              "stopName": "Mirante Do Morro Da Cruz (Sentido Saquarema)",
+              "stopLocation": {
+                "latitude": -22922361,
+                "longitude": -42481729
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 36178037,
+              "stopName": "Av. Saquarema | Rodoviária De Saquarema",
+              "stopLocation": {
+                "latitude": -22929824,
+                "longitude": -42488989
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3342781,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688191,
+              "stopName": "Avenida Saquarema | Garagem Da Rio Lagos (Sentido Saquarema)",
+              "stopLocation": {
+                "latitude": -22910183,
+                "longitude": -42476203
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689153,
+              "stopName": "Estr. De Bacaxá",
+              "stopLocation": {
+                "latitude": -22910714,
+                "longitude": -42515524
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689154,
+              "stopName": "Estr. De Bacaxá",
+              "stopLocation": {
+                "latitude": -22911430,
+                "longitude": -42516178
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849409,
+              "stopName": "Estrada Da Mombaça, 1137",
+              "stopLocation": {
+                "latitude": -22904888,
+                "longitude": -42551493
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689156,
+              "stopName": "Rua João Catarino, 3035",
+              "stopLocation": {
+                "latitude": -22912124,
+                "longitude": -42519567
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688902,
+              "stopName": "Estrada Do Palmital, 4435",
+              "stopLocation": {
+                "latitude": -22901316,
+                "longitude": -42474713
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    7608290,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689158,
+              "stopName": "Rua João Catarino, 21",
+              "stopLocation": {
+                "latitude": -22911707,
+                "longitude": -42523999
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849413,
+              "stopName": "Estrada Da Mombaça, 10",
+              "stopLocation": {
+                "latitude": -22908348,
+                "longitude": -42553176
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688903,
+              "stopName": "Avenida Saquarema | Garagem Hd Turismo (Sentido Saquarema)",
+              "stopLocation": {
+                "latitude": -22902903,
+                "longitude": -42474991
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849412,
+              "stopName": "Estrada Da Mombaça, 10",
+              "stopLocation": {
+                "latitude": -22906169,
+                "longitude": -42553010
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688904,
+              "stopName": "Avenida Saquarema, 1293",
+              "stopLocation": {
+                "latitude": -22904655,
+                "longitude": -42475296
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849419,
+              "stopName": "Estrada Da Mombaça, 2",
+              "stopLocation": {
+                "latitude": -22910617,
+                "longitude": -42549206
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688905,
+              "stopName": "Avenida Saquarema, 3123",
+              "stopLocation": {
+                "latitude": -22912998,
+                "longitude": -42476713
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35689161,
+              "stopName": "Rua Eduardo Galaxe, 100",
+              "stopLocation": {
+                "latitude": -22897021,
+                "longitude": -42525244
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688906,
+              "stopName": "Avenida Saquarema, 2335",
+              "stopLocation": {
+                "latitude": -22919555,
+                "longitude": -42479147
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849417,
+              "stopName": "Estrada Da Mombaça, 2",
+              "stopLocation": {
+                "latitude": -22909518,
+                "longitude": -42549582
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688907,
+              "stopName": "Estrada Do Palmital, 4921-4937",
+              "stopLocation": {
+                "latitude": -22896593,
+                "longitude": -42473926
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7608291,
+                    3245608,
+                    3245610,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849416,
+              "stopName": "Estrada Da Mombaça, 2",
+              "stopLocation": {
+                "latitude": -22909218,
+                "longitude": -42550912
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849423,
+              "stopName": "Estrada Da Mombaça, 2",
+              "stopLocation": {
+                "latitude": -22915316,
+                "longitude": -42547479
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849421,
+              "stopName": "Estrada Da Mombaça, 2",
+              "stopLocation": {
+                "latitude": -22911585,
+                "longitude": -42548273
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35849425,
+              "stopName": "Ponto Final - Mombaça",
+              "stopLocation": {
+                "latitude": -22917777,
+                "longitude": -42548267
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3245616
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 328642020,
+              "stopName": "R. Barão De Saquarema 543 - Centro Saquarema",
+              "stopLocation": {
+                "latitude": -22931947,
+                "longitude": -42495467
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3342777,
+                    3342783,
+                    3342782,
+                    3342781,
+                    6311407,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245608,
+                    3245610,
+                    3245615,
+                    7591724,
+                    5990779,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3245595,
+                    3245597,
+                    3245599,
+                    3892618,
+                    3342784,
+                    3245580
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688147,
+              "stopName": "Avenida Saquarema, 1395",
+              "stopLocation": {
+                "latitude": -22925517,
+                "longitude": -42484481
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3342781,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 35688149,
+              "stopName": "Avenida Saquarema, 527",
+              "stopLocation": {
+                "latitude": -22930927,
+                "longitude": -42490846
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    3342775,
+                    3245589,
+                    3282198,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3245599,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245608,
+                    3245610,
+                    3245580,
+                    3245615,
+                    7591724
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            },
+            {
+              "stopId": 321114581,
+              "stopName": "Ar Sq 14 - Sentido Saquarema",
+              "stopLocation": {
+                "latitude": -22927552,
+                "longitude": -42487003
+              },
+              "image": {
+                "imageId": -53,
+                "parameters": []
+              },
+              "platformLines": [
+                {
+                  "lineIds": [
+                    5990779,
+                    3342775,
+                    3245589,
+                    3245591,
+                    3245593,
+                    6187892,
+                    3342777,
+                    3245595,
+                    3245597,
+                    3342783,
+                    3342782,
+                    3342781,
+                    3245599,
+                    6311407,
+                    3892618,
+                    3342784,
+                    7379685,
+                    7608290,
+                    7608291,
+                    3245610,
+                    3245580,
+                    3245615
+                  ]
+                }
+              ],
+              "keyLineIds": [],
+              "sitesList": [],
+              "imageRefSet": {
+                "images": [
+                  {
+                    "index": 1800,
+                    "imageRef": {
+                      "imageId": -2,
+                      "parameters": []
+                    }
+                  },
+                  {
+                    "index": 1750,
+                    "imageRef": {
+                      "imageId": -1,
+                      "parameters": []
+                    }
+                  }
+                ]
+              },
+              "routeType": 3,
+              "wheelchairAccessible": 0,
+              "timeZone": "America/Sao_Paulo"
+            }
+          ]
+        }
+      },
+      {
+        "result": {
+          "itinerary": {
+            "guid": "20250624B0A8BBC438D64A9A9B6618B7D8FF5A2C:0",
+            "sectionId": 1561,
+            "groupType": 4,
+            "groupKey": "1561",
+            "legs": [
+              {
+                "waitToTaxiLeg": {
+                  "time": {
+                    "startTimeUtc": 1750773899000,
+                    "endTimeUtc": 1750774019000,
+                    "isRealTime": 0,
+                    "staticStartTimeUtc": 1750773899000,
+                    "staticEndTimeUtc": 1750774019000
+                  },
+                  "waitAtLocation": {
+                    "caption": "Ponto Final - Bacaxá (Horto)",
+                    "id": 35688125,
+                    "latlon": {
+                      "latitude": -22894261,
+                      "longitude": -42469559
+                    },
+                    "type": 5,
+                    "metroId": 322
+                  },
+                  "approxWaitingSecFromOrdering": 120,
+                  "taxiId": 15,
+                  "customParameters": [],
+                  "metroId": 322
+                }
+              },
+              {
+                "taxiLeg": {
+                  "time": {
+                    "startTimeUtc": 1750774019000,
+                    "endTimeUtc": 1750775570000,
+                    "isRealTime": 0,
+                    "staticStartTimeUtc": 1750774019000,
+                    "staticEndTimeUtc": 1750775570000
+                  },
+                  "journey": {
+                    "origin": {
+                      "caption": "Ponto Final - Bacaxá (Horto)",
+                      "id": 35688125,
+                      "latlon": {
+                        "latitude": -22894261,
+                        "longitude": -42469559
+                      },
+                      "type": 5,
+                      "metroId": 322
+                    },
+                    "dest": {
+                      "caption": "Ponto Final - Mombaça",
+                      "id": 35849425,
+                      "latlon": {
+                        "latitude": -22917777,
+                        "longitude": -42548267
+                      },
+                      "type": 5,
+                      "metroId": 322
+                    }
+                  },
+                  "shape": {
+                    "distanceInMeters": 12578.60350498557,
+                    "polyline": "povjCrzebGT\\N\\d@t@l@dAb@v@mATaAFuANcAHu@Hi@FY@KXKX?BKPSf@Yl@Wb@Y^QVURONQLCBEBSLc@XYNSFm@H_@B]BYB[?e@@i@BYDs@DM@K@KBMDCHGDKBUH]F_@N[JYHWFUJQHMHSP]ZYZSPQVSZS\\QZQ^Ob@Qp@ETGXE^ATAXAd@C|@Ct@?LEx@?bAAd@?h@An@?b@?bA?NKj@CTITKXKXGLKNQVUXUTUTWPMHQJMHIFWTWTORU^S`@MZSj@Uf@El@Eh@A`@?T@RBd@Bn@Bv@Dl@@ZAd@EXCPCLALWf@QZONMJIDIDQLUR[XSVY^QZQZMVKVM\\KZIZGZEVG`@Gt@IbACVKbAI`AqApMG^CVDJfA|GTz@HJLFJ@NA\\KPCL@RF^X[TKPGREZYvCOn@ITMLMNtEnKJTNZvBnCJTHVBTERSj@o@fAYXyAx@SR}@~Ag@~@Wb@ET?`@FVNRhA|@LLPTLVn@~APp@F^?X@j@B\\d@tC\\xCHpA@l@A^AFEb@K^Qh@MRU`@O`@Qn@Op@Kn@SfAIt@@x@L`ALhA`@fCVfAJbABpA?`AFfAA`@M`@Sx@Mz@W`Be@tAMv@Gt@KrG[dH[nIlAzBfAlBbAnB\\j@PTRRh@\\~AdAt@j@VRf@TVF\\FZFJDNNVZHRZ^RLd@b@PLPNv@|A\\v@`@jATd@RVTRRJ\\JVFXB~@HX@^@x@HpA^zBp@bDhAWl@ELELQpA?J?N?hBDjCD`DCf@Mp@WbAm@bCa@pA]hAC\\AXK|BKpBAb@DXHLJD|@NfAd@~@n@j@`AXhAT~ARnBNvBBbAHv@Rx@@BV^\\XZP~AZl@Bz@Ef@If@I\\?h@P^Tv@t@fAnAj@z@Xp@R|@C~@S|A}@~CI~@F~@TpAFl@B|@@~AJl@Vl@j@nBP`AJ|@@t@CdAWdDGr@D@V@X@p@FpANxBLl@Dj@Ft@Pn@XTJRNZ\\@BLVDL`@tA\\p@b@j@f@h@jBdBxAtAnApAn@j@@@JJbBfBvA~A`@`@JJf@^x@p@vAfAFDHFRL@y@By@Fg@Vu@^s@j@w@p@u@j@i@`@[ZMZIZAZ@\\Fj@Pv@PZH`@Lp@\\nCfBv@j@\\Nd@L^Jd@Fr@FPDb@FrAX?AHGPSVI~@I`AQb@QB?HGZSl@g@b@o@r@y@LKFGHGXOTEf@Ab@?`AIh@Gn@Oz@O|@IvAMj@Ep@Ij@K`@If@Ab@?B?L?n@Bj@Dp@NfBh@fBv@v@\\f@RFFNAB?"
+                  },
+                  "approxWaitingSecFromOrdering": 120,
+                  "taxiId": 15,
+                  "customParameters": [
+                    {
+                      "key": "ClickId",
+                      "value": "7b2263697068657254657874223a224e68366c365465457132776f5074656e66736f5179773d3d222c226976223a224f314e646b485633554852642f6233542b57794277413d3d222c226b657956657273696f6e223a225632227d"
+                    },
+                    {
+                      "key": "AnalyticsFlowSeqId",
+                      "value": "null"
+                    },
+                    {
+                      "key": "af_moovit_int",
+                      "value": "322_null_1561"
+                    }
+                  ],
+                  "deepLinks": {
+                    "androidApplicationId": "com.ubercab",
+                    "androidDeepLink": "https://m.uber.com/ul/?action=setPickup&client_id=QsUmgbxhauR2SF1BqovCjWLWiJ-B38aH&pickup[latitude]=from_lat&pickup[longitude]=from_lon&pickup[nickname]=from_name&dropoff[latitude]=to_lat&dropoff[longitude]=to_lon&dropoff[nickname]=to_name",
+                    "iosAppInstalLink": "https://m.uber.com/sign-up/?client_id=QsUmgbxhauR2SF1BqovCjWLWiJ-B38aH",
+                    "iosDeepLink": "https://m.uber.com/ul/?action=setPickup&client_id=QsUmgbxhauR2SF1BqovCjWLWiJ-B38aH&pickup[latitude]=from_lat&pickup[longitude]=from_lon&pickup[nickname]=from_name&dropoff[latitude]=to_lat&dropoff[longitude]=to_lon&dropoff[nickname]=to_name",
+                    "iosScheme": "uber://",
+                    "androidAppInstallLink": "https://m.uber.com/sign-up/?client_id=QsUmgbxhauR2SF1BqovCjWLWiJ-B38aH",
+                    "webDeepLink": "https://r.bttn.io?btn_ref=org-2bc92c23f728c2f1&btn_pub_ref=wtp&btn_url=https://m.uber.com/ul/?action=setPickup&client_id=QsUmgbxhauR2SF1BqovCjWLWiJ-B38aH&pickup[latitude]=from_lat&pickup[longitude]=from_lon&pickup[nickname]=from_name&dropoff[latitude]=to_lat&dropoff[longitude]=to_lon&dropoff[nickname]=to_name",
+                    "seoDeepLink": "https://r.bttn.io/?btn_url=https%3A%2F%2Fm.uber.com%2F&btn_ref=org-2bc92c23f728c2f1&btn_pub_ref=seo"
+                  },
+                  "taxiProviderName": "Uber",
+                  "metroId": 322
+                }
+              }
+            ],
+            "hasPrev": 0,
+            "hasNext": 0,
+            "relevantForRealtime": 0,
+            "isAccessible": 0,
+            "hasSecondaryArrivalItinerary": 0,
+            "sectionName": "Táxi e transporte privado",
+            "serverContext": "{\"sectionRequestId\":3,\"tripPlanProfile\":\"Fastest\",\"timeTargetTimestamp\":1750773886353,\"sectionId\":1561}"
+          }
+        },
+        "supplementalData": {}
+      }
+    ],
+    "completed": 1
+  }

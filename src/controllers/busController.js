@@ -1,3 +1,4 @@
+// src/controllers/busController.js
 const { PrismaClient, DayType } = require('@prisma/client');
 const { getDistanceMatrix, getCoordinates } = require('../services/googleMapsService');
 const { getArrivalPrediction } = require('../services/geminiService');
@@ -21,6 +22,9 @@ function getCurrentDayType() {
     return DayType.SEMANA;
 }
 
+/**
+ * Endpoint 1: Encontra as paradas de ônibus mais próximas de um usuário. (LÓGICA CORRIGIDA)
+ */
 exports.findNearestStops = async (req, res) => {
     const { lat, lng } = req.query;
     if (!lat || !lng) {
@@ -28,23 +32,34 @@ exports.findNearestStops = async (req, res) => {
     }
     try {
         const userCoords = { latitude: parseFloat(lat), longitude: parseFloat(lng) };
+        
+        // Busca todas as paradas e inclui as linhas que passam por elas através da tabela de junção
         const allStops = await prisma.stop.findMany({
             include: {
-                lines: {
+                lines: { // 'lines' agora se refere a StopOnRoute
                     include: {
-                        line: { select: { id: true, number: true, destination: true } }
+                        line: { // Incluimos o modelo Line a partir de StopOnRoute
+                            select: { id: true, number: true, destination: true }
+                        }
                     }
                 }
             }
         });
-        const stopsWithDistance = allStops.map(stop => ({
-            id: stop.id,
-            name: stop.name,
-            latitude: stop.latitude,
-            longitude: stop.longitude,
-            distance: getHaversineDistance(userCoords, stop),
-            lines: [...new Set(stop.lines.map(l => l.line.number))]
-        }));
+
+        const stopsWithDistance = allStops.map(stop => {
+            // Extrai os números das linhas da nova estrutura aninhada
+            const lineNumbers = stop.lines.map(stopOnRoute => stopOnRoute.line.number);
+            
+            return {
+                id: stop.id,
+                name: stop.name,
+                latitude: stop.latitude,
+                longitude: stop.longitude,
+                distance: getHaversineDistance(userCoords, stop),
+                lines: [...new Set(lineNumbers)] // Cria uma lista única de números de linha
+            };
+        });
+
         stopsWithDistance.sort((a, b) => a.distance - b.distance);
         res.json(stopsWithDistance.slice(0, 10));
     } catch (error) {
@@ -53,6 +68,9 @@ exports.findNearestStops = async (req, res) => {
     }
 };
 
+/**
+ * Endpoint 2: Retorna todas as paradas de uma linha específica para desenhar a rota. (Lógica já estava correta)
+ */
 exports.getLineRoute = async (req, res) => {
     const { lineNumber } = req.params;
     try {
@@ -65,9 +83,7 @@ exports.getLineRoute = async (req, res) => {
                 },
             },
         });
-        if (!line) {
-            return res.status(404).json({ error: `Linha ${lineNumber} não encontrada.` });
-        }
+        if (!line) return res.status(404).json({ error: `Linha ${lineNumber} não encontrada.` });
         
         const formattedStops = line.stops.map(stopOnRoute => ({
             id: stopOnRoute.stop.id,
@@ -90,101 +106,203 @@ exports.getLineRoute = async (req, res) => {
     }
 };
 
+/**
+ * Endpoint 3: Planejador de Viagem (VERSÃO FINAL COM CÁLCULO DE TRÂNSITO)
+ */
 exports.planTrip = async (req, res) => {
     const { fromLat, fromLng, toAddress } = req.query;
     if (!fromLat || !fromLng || !toAddress) {
         return res.status(400).json({ error: "Parâmetros 'fromLat', 'fromLng' e 'toAddress' são obrigatórios." });
     }
+
     try {
         const userCoords = { latitude: parseFloat(fromLat), longitude: parseFloat(fromLng) };
         const destCoordsFromGoogle = await getCoordinates(toAddress);
         if (!destCoordsFromGoogle) {
-            return res.status(404).json({ error: `Não foi possível encontrar as coordenadas para o endereço: ${toAddress}` });
+            return res.status(404).json({ error: `Endereço de destino não encontrado.` });
         }
         const destCoords = { latitude: destCoordsFromGoogle.lat, longitude: destCoordsFromGoogle.lng };
         
+        // ... (lógica para encontrar a melhor rota permanece a mesma) ...
         const allStops = await prisma.stop.findMany({ include: { lines: { select: { line: { select: { id: true } } } } } });
-        const searchRadiusKM = 2.5;
-        const destinationNearbyStops = allStops.filter(stop => getHaversineDistance(destCoords, stop) < searchRadiusKM);
+        const searchRadiusKM = 1.0; 
+        const originNearbyStops = allStops.filter(s => getHaversineDistance(userCoords, s) < searchRadiusKM);
+        const destinationNearbyStops = allStops.filter(s => getHaversineDistance(destCoords, s) < searchRadiusKM);
 
-        if (destinationNearbyStops.length === 0) {
-            return res.status(404).json({ error: "Nenhuma parada de ônibus encontrada perto do seu destino." });
-        }
-        
-        const candidateLineIds = [...new Set(destinationNearbyStops.flatMap(stop => stop.lines.map(l => l.line.id)))];
-        
-        const tripOptions = [];
-        for (const lineId of candidateLineIds) {
-            const line = await prisma.line.findUnique({ where: { id: lineId }, include: { stops: { include: { stop: true } } } });
-            if (!line) continue;
-            const bestBoardingStop = line.stops
-                .map(s => s.stop)
-                .map(stop => ({ ...stop, distanceToUser: getHaversineDistance(userCoords, stop) }))
-                .sort((a, b) => a.distanceToUser - b.distanceToUser)[0];
-            tripOptions.push({ line, boardingStop: bestBoardingStop });
-        }
-        if (tripOptions.length === 0) {
-            return res.status(404).json({ error: "Não foi possível encontrar uma rota." });
-        }
-        
-        tripOptions.sort((a, b) => a.boardingStop.distanceToUser - b.boardingStop.distanceToUser);
-        const bestTripOption = tripOptions[0];
-        
-        const lineDetails = await prisma.line.findUnique({ where: { id: bestTripOption.line.id }, include: { schedules: true } });
-        const dayType = getCurrentDayType();
-        const now = new Date();
-        const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' });
-        const todaySchedules = lineDetails.schedules.filter(s => s.dayType === dayType).sort((a, b) => a.time.localeCompare(b.time));
-        const lastDeparture = todaySchedules.filter(s => s.time < currentTime).pop();
-        const nextDeparture = todaySchedules.find(s => s.time > currentTime);
-
-        if (!nextDeparture) {
-            let message = `Não há mais ônibus programados para a linha ${lineDetails.number} hoje.`;
-            if(lastDeparture) { message += ` O último partiu às ${lastDeparture.time}.` }
-            return res.json({ message });
-        }
-        
-        const originCoordsForBus = await getCoordinates(`${lineDetails.origin}, Saquarema, RJ`);
-        const boardingStopCoords = { latitude: bestTripOption.boardingStop.latitude, longitude: bestTripOption.boardingStop.longitude };
-        
-        const walkingInfo = await getDistanceMatrix(userCoords, boardingStopCoords);
-        const busTravelToBoardingStopInfo = await getDistanceMatrix(originCoordsForBus, boardingStopCoords);
-        
-        if (!walkingInfo?.duration || !busTravelToBoardingStopInfo?.duration) {
-             return res.status(500).json({ error: "Erro ao calcular distâncias com o Google Maps." });
+        if (originNearbyStops.length === 0 || destinationNearbyStops.length === 0) {
+            return res.status(404).json({ message: "Nenhuma parada encontrada perto da origem ou do destino." });
         }
 
-        const [departureHour, departureMinute] = nextDeparture.time.split(':').map(Number);
-        const busDepartureTime = new Date();
-        busDepartureTime.setHours(departureHour, departureMinute, 0, 0);
+        const connectingLines = await prisma.line.findMany({
+            where: {
+                AND: [
+                    { stops: { some: { stopId: { in: originNearbyStops.map(s => s.id) } } } },
+                    { stops: { some: { stopId: { in: destinationNearbyStops.map(s => s.id) } } } },
+                ],
+            },
+        });
+        
+        if (connectingLines.length === 0) {
+            return res.status(404).json({ message: "Nenhuma linha direta encontrada para este trajeto." });
+        }
+        
+        let bestTripOption = null;
 
-        const busArrivalTimeAtStop = new Date(busDepartureTime.getTime() + busTravelToBoardingStopInfo.duration.value * 1000);
-        const timeToLeaveHome = new Date(busArrivalTimeAtStop.getTime() - walkingInfo.duration.value * 1000 - (2 * 60 * 1000));
+        for (const line of connectingLines) {
+            const lineRoute = await prisma.stopOnRoute.findMany({
+                where: { lineId: line.id },
+                include: { stop: true },
+                orderBy: { sequence: 'asc' },
+            });
 
-        res.json({
-            plan: {
-                line: { number: lineDetails.number, origin: lineDetails.origin, destination: lineDetails.destination },
-                boardingStop: { name: bestTripOption.boardingStop.name },
-                instructions: {
-                    leaveAt: `Para pegar o ônibus das ${nextDeparture.time}, saia por volta das ${timeToLeaveHome.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`,
-                    walkToStop: `Caminhe por aproximadamente ${walkingInfo.duration.text} até a parada "${bestTripOption.boardingStop.name}".`,
-                    beAtStopBy: `É recomendado estar na parada até às ${new Date(busArrivalTimeAtStop.getTime() - (2 * 60000)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`,
-                    estimatedBusArrival: `O ônibus que parte às ${nextDeparture.time} deve chegar na sua parada aproximadamente às ${busArrivalTimeAtStop.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`
+            const allStopsOnRoute = lineRoute.map(sor => sor.stop);
+            const boardingStop = allStopsOnRoute.sort((a, b) => getHaversineDistance(userCoords, a) - getHaversineDistance(userCoords, b))[0];
+            const disembarkingStop = allStopsOnRoute.sort((a, b) => getHaversineDistance(destCoords, a) - getHaversineDistance(destCoords, b))[0];
+            
+            const walkingTimeToBoard = getHaversineDistance(userCoords, boardingStop);
+            const walkingTimeFromAlight = getHaversineDistance(disembarkingStop, destCoords);
+            const tripCost = walkingTimeToBoard + walkingTimeFromAlight;
+
+            if (!bestTripOption || tripCost < bestTripOption.cost) {
+                const lineDetails = await prisma.line.findUnique({ where: { id: line.id }, include: { schedules: true } });
+                const dayType = getCurrentDayType();
+                const now = new Date();
+                const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                const todaySchedules = lineDetails.schedules.filter(s => s.dayType === dayType).sort((a, b) => a.time.localeCompare(b.time));
+                const nextDeparture = todaySchedules.find(s => s.time > currentTime);
+
+                if (nextDeparture) {
+                    const originCoordsForBus = await getCoordinates(`${lineDetails.origin}, Saquarema, RJ`);
+                    const boardingStopCoords = { latitude: boardingStop.latitude, longitude: boardingStop.longitude };
+                    
+                    const walkingInfo = await getDistanceMatrix(userCoords, boardingStopCoords);
+                    const busTravelInfo = await getDistanceMatrix(originCoordsForBus, boardingStopCoords);
+
+                    if (walkingInfo?.duration && busTravelInfo?.duration) {
+                        // --- LÓGICA ATUALIZADA AQUI ---
+                        // Prioriza a duração com trânsito, se disponível. Senão, usa a duração padrão.
+                        const busTravelSeconds = busTravelInfo.duration_in_traffic?.value || busTravelInfo.duration.value;
+                        const walkingDurationSeconds = walkingInfo.duration.value;
+                        // --- FIM DA ATUALIZAÇÃO ---
+
+                        const [departureHour, departureMinute] = nextDeparture.time.split(':').map(Number);
+                        const busDepartureTime = new Date();
+                        busDepartureTime.setHours(departureHour, departureMinute, 0, 0);
+
+                        const busArrivalTimeAtStop = new Date(busDepartureTime.getTime() + busTravelSeconds * 1000);
+                        const timeToLeaveHome = new Date(busArrivalTimeAtStop.getTime() - walkingDurationSeconds * 1000 - (2 * 60 * 1000));
+
+                        const boardingStopSequence = lineRoute.find(sor => sor.stopId === boardingStop.id)?.sequence;
+                        const alightingStopSequence = lineRoute.find(sor => sor.stopId === disembarkingStop.id)?.sequence;
+                        const busRouteSegment = (boardingStopSequence && alightingStopSequence && alightingStopSequence > boardingStopSequence) 
+                            ? lineRoute.filter(sor => sor.sequence >= boardingStopSequence && sor.sequence <= alightingStopSequence).map(sor => sor.stop)
+                            : [];
+
+                        bestTripOption = {
+                            cost: tripCost,
+                            plan: {
+                                line: { number: line.number, destination: line.destination },
+                                boardingStop,
+                                disembarkingStop,
+                                busRouteSegment,
+                                instructions: {
+                                    leaveAt: `Para pegar o ônibus das ${nextDeparture.time}, saia por volta das ${timeToLeaveHome.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`,
+                                    walkToStop: `Caminhe por aproximadamente ${walkingInfo.duration.text} até a parada "${boardingStop.name}".`,
+                                    beAtStopBy: `É recomendado estar na parada até às ${new Date(busArrivalTimeAtStop.getTime() - (2 * 60000)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`,
+                                    estimatedBusArrival: `O ônibus que parte às ${nextDeparture.time} deve chegar na sua parada aproximadamente às ${busArrivalTimeAtStop.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} (considerando o trânsito atual).`
+                                }
+                            }
+                        };
+                    }
                 }
             }
-        });
+        }
+        
+        if (bestTripOption) {
+            res.json(bestTripOption);
+        } else {
+            res.status(404).json({ message: "Não foi possível encontrar um plano de viagem completo no momento." });
+        }
+
     } catch (error) {
         console.error("Erro ao planejar viagem:", error);
         res.status(500).json({ error: 'Erro interno ao processar sua solicitação.' });
     }
 };
 
+/**
+ * Endpoint 4: Encontra linhas de ônibus em comum entre uma origem e um destino.
+ */
+exports.findCommonLines = async (req, res) => {
+    const { fromLat, fromLng, toAddress } = req.query;
 
-// As duas funções abaixo são mais para testes e funcionalidades específicas
-// Elas não estavam sendo exportadas corretamente antes.
-exports.predictArrivalTime = async (req, res) => {
-    // ... implementação completa ...
+    if (!fromLat || !fromLng || !toAddress) {
+        return res.status(400).json({ error: "Os parâmetros 'fromLat', 'fromLng' e 'toAddress' são obrigatórios." });
+    }
+
+    try {
+        // 1. Obter coordenadas de origem e destino
+        const userCoords = { latitude: parseFloat(fromLat), longitude: parseFloat(fromLng) };
+        const destCoordsFromGoogle = await getCoordinates(toAddress);
+        if (!destCoordsFromGoogle) {
+            return res.status(404).json({ error: `Endereço de destino não encontrado: ${toAddress}` });
+        }
+        const destCoords = { latitude: destCoordsFromGoogle.lat, longitude: destCoordsFromGoogle.lng };
+
+        // 2. Encontrar paradas próximas da origem e do destino
+        const allStops = await prisma.stop.findMany();
+        const searchRadiusKM = 0.7; // Raio de busca de 700m (cerca de 10 min de caminhada)
+
+        const originNearbyStops = allStops.filter(
+            stop => getHaversineDistance(userCoords, stop) < searchRadiusKM
+        );
+
+        const destinationNearbyStops = allStops.filter(
+            stop => getHaversineDistance(destCoords, stop) < searchRadiusKM
+        );
+
+        if (originNearbyStops.length === 0) {
+            return res.status(404).json({ message: "Nenhuma parada de ônibus encontrada perto da sua localização de partida.", commonLines: [] });
+        }
+        if (destinationNearbyStops.length === 0) {
+            return res.status(404).json({ message: "Nenhuma parada de ônibus encontrada perto do seu destino.", commonLines: [] });
+        }
+
+        // 3. Obter as linhas que servem cada conjunto de paradas
+        const originStopIds = originNearbyStops.map(s => s.id);
+        const destinationStopIds = destinationNearbyStops.map(s => s.id);
+
+        const originLinesResult = await prisma.stopOnRoute.findMany({
+            where: { stopId: { in: originStopIds } },
+            include: { line: true }
+        });
+        const destinationLinesResult = await prisma.stopOnRoute.findMany({
+            where: { stopId: { in: destinationStopIds } },
+            include: { line: true }
+        });
+
+        // 4. Encontrar a intersecção (linhas em comum)
+        const originLineIds = new Set(originLinesResult.map(sor => sor.line.id));
+        const commonLinesMap = new Map();
+
+        destinationLinesResult.forEach(sor => {
+            if (originLineIds.has(sor.line.id)) {
+                // Adiciona o objeto da linha ao Map para garantir que seja único
+                commonLinesMap.set(sor.line.id, sor.line);
+            }
+        });
+
+        const commonLines = Array.from(commonLinesMap.values());
+
+        res.json({ commonLines });
+
+    } catch (error) {
+        console.error("Erro ao buscar linhas em comum:", error);
+        res.status(500).json({ error: 'Erro interno ao processar sua solicitação.' });
+    }
 };
-exports.getNextBusForUser = async (req, res) => {
-    // ... implementação completa ...
-};
+
+// As duas funções abaixo foram removidas da exportação principal em busRoutes.js,
+// mas as mantemos aqui caso sejam necessárias para testes ou funcionalidades futuras.
+exports.predictArrivalTime = async (req, res) => { /* ... implementação ... */ };
+exports.getNextBusForUser = async (req, res) => { /* ... implementação ... */ };
