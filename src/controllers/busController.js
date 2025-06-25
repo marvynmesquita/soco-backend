@@ -1,10 +1,13 @@
-// src/controllers/busController.js
+
+
 const { PrismaClient, DayType } = require('@prisma/client');
 const { getDistanceMatrix, getCoordinates } = require('../services/googleMapsService');
 const { getArrivalPrediction } = require('../services/geminiService');
+const polylineCodec = require('@googlemaps/polyline-codec');
 
 const prisma = new PrismaClient();
 
+// --- FUNÇÕES AUXILIARES ---
 function getHaversineDistance(coords1, coords2) {
     function toRad(x) { return (x * Math.PI) / 180; }
     const R = 6371;
@@ -21,6 +24,8 @@ function getCurrentDayType() {
     if (dayOfWeek === 6) return DayType.SABADO;
     return DayType.SEMANA;
 }
+
+// --- ENDPOINTS DA API ---
 
 /**
  * Endpoint 1: Encontra as paradas de ônibus mais próximas de um usuário. (LÓGICA CORRIGIDA)
@@ -107,7 +112,7 @@ exports.getLineRoute = async (req, res) => {
 };
 
 /**
- * Endpoint 3: Planejador de Viagem (VERSÃO FINAL COM CÁLCULO DE TRÂNSITO)
+ * Endpoint 3: Planejador de Viagem (VERSÃO FINAL COM TODAS AS INTEGRAÇÕES)
  */
 exports.planTrip = async (req, res) => {
     const { fromLat, fromLng, toAddress } = req.query;
@@ -123,9 +128,8 @@ exports.planTrip = async (req, res) => {
         }
         const destCoords = { latitude: destCoordsFromGoogle.lat, longitude: destCoordsFromGoogle.lng };
         
-        // ... (lógica para encontrar a melhor rota permanece a mesma) ...
         const allStops = await prisma.stop.findMany({ include: { lines: { select: { line: { select: { id: true } } } } } });
-        const searchRadiusKM = 1.0; 
+        const searchRadiusKM = 1.5;
         const originNearbyStops = allStops.filter(s => getHaversineDistance(userCoords, s) < searchRadiusKM);
         const destinationNearbyStops = allStops.filter(s => getHaversineDistance(destCoords, s) < searchRadiusKM);
 
@@ -134,12 +138,7 @@ exports.planTrip = async (req, res) => {
         }
 
         const connectingLines = await prisma.line.findMany({
-            where: {
-                AND: [
-                    { stops: { some: { stopId: { in: originNearbyStops.map(s => s.id) } } } },
-                    { stops: { some: { stopId: { in: destinationNearbyStops.map(s => s.id) } } } },
-                ],
-            },
+            where: { AND: [ { stops: { some: { stopId: { in: originNearbyStops.map(s => s.id) } } } }, { stops: { some: { stopId: { in: destinationNearbyStops.map(s => s.id) } } } } ] },
         });
         
         if (connectingLines.length === 0) {
@@ -149,80 +148,92 @@ exports.planTrip = async (req, res) => {
         let bestTripOption = null;
 
         for (const line of connectingLines) {
-            const lineRoute = await prisma.stopOnRoute.findMany({
-                where: { lineId: line.id },
-                include: { stop: true },
-                orderBy: { sequence: 'asc' },
-            });
-
+            const lineRoute = await prisma.stopOnRoute.findMany({ where: { lineId: line.id }, include: { stop: true }, orderBy: { sequence: 'asc' } });
             const allStopsOnRoute = lineRoute.map(sor => sor.stop);
             const boardingStop = allStopsOnRoute.sort((a, b) => getHaversineDistance(userCoords, a) - getHaversineDistance(userCoords, b))[0];
             const disembarkingStop = allStopsOnRoute.sort((a, b) => getHaversineDistance(destCoords, a) - getHaversineDistance(destCoords, b))[0];
             
-            const walkingTimeToBoard = getHaversineDistance(userCoords, boardingStop);
-            const walkingTimeFromAlight = getHaversineDistance(disembarkingStop, destCoords);
-            const tripCost = walkingTimeToBoard + walkingTimeFromAlight;
+            const boardingStopSequence = lineRoute.find(sor => sor.stopId === boardingStop.id)?.sequence;
+            const alightingStopSequence = lineRoute.find(sor => sor.stopId === disembarkingStop.id)?.sequence;
+            
+            if (!boardingStopSequence || !alightingStopSequence || alightingStopSequence < boardingStopSequence) {
+                continue; 
+            }
+            
+            const tripCost = getHaversineDistance(userCoords, boardingStop) + getHaversineDistance(disembarkingStop, destCoords);
 
             if (!bestTripOption || tripCost < bestTripOption.cost) {
                 const lineDetails = await prisma.line.findUnique({ where: { id: line.id }, include: { schedules: true } });
-                const dayType = getCurrentDayType();
-                const now = new Date();
-                const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                const todaySchedules = lineDetails.schedules.filter(s => s.dayType === dayType).sort((a, b) => a.time.localeCompare(b.time));
-                const nextDeparture = todaySchedules.find(s => s.time > currentTime);
-
-                if (nextDeparture) {
-                    const originCoordsForBus = await getCoordinates(`${lineDetails.origin}, Saquarema, RJ`);
-                    const boardingStopCoords = { latitude: boardingStop.latitude, longitude: boardingStop.longitude };
+                const busRouteSegment = lineRoute.filter(sor => sor.sequence >= boardingStopSequence && sor.sequence <= alightingStopSequence).map(sor => sor.stop);
+                
+                let segmentPolyline = line.polyline;
+                if (line.polyline && busRouteSegment.length > 1) {
+                    const decodedPath = polylineCodec.decode(line.polyline);
+                    const boardingPointIndex = decodedPath.map(p => getHaversineDistance({latitude: p[0], longitude: p[1]}, boardingStop)).reduce((prev, curr, i, arr) => curr < arr[prev] ? i : prev, 0);
+                    const alightingPointIndex = decodedPath.map(p => getHaversineDistance({latitude: p[0], longitude: p[1]}, disembarkingStop)).reduce((prev, curr, i, arr) => curr < arr[prev] ? i : prev, 0);
                     
-                    const walkingInfo = await getDistanceMatrix(userCoords, boardingStopCoords);
-                    const busTravelInfo = await getDistanceMatrix(originCoordsForBus, boardingStopCoords);
-
-                    if (walkingInfo?.duration && busTravelInfo?.duration) {
-                        // --- LÓGICA ATUALIZADA AQUI ---
-                        // Prioriza a duração com trânsito, se disponível. Senão, usa a duração padrão.
-                        const busTravelSeconds = busTravelInfo.duration_in_traffic?.value || busTravelInfo.duration.value;
-                        const walkingDurationSeconds = walkingInfo.duration.value;
-                        // --- FIM DA ATUALIZAÇÃO ---
-
-                        const [departureHour, departureMinute] = nextDeparture.time.split(':').map(Number);
-                        const busDepartureTime = new Date();
-                        busDepartureTime.setHours(departureHour, departureMinute, 0, 0);
-
-                        const busArrivalTimeAtStop = new Date(busDepartureTime.getTime() + busTravelSeconds * 1000);
-                        const timeToLeaveHome = new Date(busArrivalTimeAtStop.getTime() - walkingDurationSeconds * 1000 - (2 * 60 * 1000));
-
-                        const boardingStopSequence = lineRoute.find(sor => sor.stopId === boardingStop.id)?.sequence;
-                        const alightingStopSequence = lineRoute.find(sor => sor.stopId === disembarkingStop.id)?.sequence;
-                        const busRouteSegment = (boardingStopSequence && alightingStopSequence && alightingStopSequence > boardingStopSequence) 
-                            ? lineRoute.filter(sor => sor.sequence >= boardingStopSequence && sor.sequence <= alightingStopSequence).map(sor => sor.stop)
-                            : [];
-
-                        bestTripOption = {
-                            cost: tripCost,
-                            plan: {
-                                line: { number: line.number, destination: line.destination },
-                                boardingStop,
-                                disembarkingStop,
-                                busRouteSegment,
-                                instructions: {
-                                    leaveAt: `Para pegar o ônibus das ${nextDeparture.time}, saia por volta das ${timeToLeaveHome.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`,
-                                    walkToStop: `Caminhe por aproximadamente ${walkingInfo.duration.text} até a parada "${boardingStop.name}".`,
-                                    beAtStopBy: `É recomendado estar na parada até às ${new Date(busArrivalTimeAtStop.getTime() - (2 * 60000)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}.`,
-                                    estimatedBusArrival: `O ônibus que parte às ${nextDeparture.time} deve chegar na sua parada aproximadamente às ${busArrivalTimeAtStop.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} (considerando o trânsito atual).`
-                                }
-                            }
-                        };
+                    if (alightingPointIndex > boardingPointIndex) {
+                        const segmentPath = decodedPath.slice(boardingPointIndex, alightingPointIndex + 1);
+                        segmentPolyline = polylineCodec.encode(segmentPath);
                     }
                 }
+
+                bestTripOption = {
+                    cost: tripCost,
+                    plan: {
+                        line: { ...lineDetails, polyline: segmentPolyline },
+                        boardingStop: { id: boardingStop.id, name: boardingStop.name, latitude: boardingStop.latitude, longitude: boardingStop.longitude },
+                        disembarkingStop: { id: disembarkingStop.id, name: disembarkingStop.name, latitude: disembarkingStop.latitude, longitude: disembarkingStop.longitude },
+                        busRouteSegment,
+                    }
+                };
             }
         }
         
+        // --- BLOCO DE INTEGRAÇÃO COM GEMINI ADICIONADO ---
         if (bestTripOption) {
+            try {
+                const busCurrentPosition = { latitude: bestTripOption.plan.busRouteSegment[0].latitude, longitude: bestTripOption.plan.busRouteSegment[0].longitude };
+                const currentTime = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+                // --- Estimativa para o Ponto de Embarque ---
+                const toBoardingStopMatrix = await getDistanceMatrix(busCurrentPosition, bestTripOption.plan.boardingStop);
+                if (toBoardingStopMatrix && toBoardingStopMatrix.duration_in_traffic) {
+                    const predictionText = await getArrivalPrediction({
+                        line: bestTripOption.plan.line,
+                        distanceText: toBoardingStopMatrix.distance.text,
+                        durationText: toBoardingStopMatrix.duration_in_traffic.text,
+                        stopName: bestTripOption.plan.boardingStop.name,
+                        departureTime: "N/A",
+                        currentTime
+                    });
+                    bestTripOption.plan.boardingStop.estimatedArrivalTime = predictionText.match(/\d{2}:\d{2}/)?.[0] || "N/A";
+                }
+
+                // --- Estimativa para o Ponto de Desembarque ---
+                const toDisembarkingStopMatrix = await getDistanceMatrix(busCurrentPosition, bestTripOption.plan.disembarkingStop);
+                if (toDisembarkingStopMatrix && toDisembarkingStopMatrix.duration_in_traffic) {
+                     const predictionText = await getArrivalPrediction({
+                        line: bestTripOption.plan.line,
+                        distanceText: toDisembarkingStopMatrix.distance.text,
+                        durationText: toDisembarkingStopMatrix.duration_in_traffic.text,
+                        stopName: bestTripOption.plan.disembarkingStop.name,
+                        departureTime: "N/A",
+                        currentTime
+                    });
+                    bestTripOption.plan.disembarkingStop.estimatedArrivalTime = predictionText.match(/\d{2}:\d{2}/)?.[0] || "N/A";
+                }
+                
+            } catch (e) {
+                console.error("Erro ao obter previsão de horário do Gemini:", e);
+                // Continua sem os horários em caso de erro, não quebra a requisição
+            }
+            
             res.json(bestTripOption);
         } else {
-            res.status(404).json({ message: "Não foi possível encontrar um plano de viagem completo no momento." });
+            res.status(404).json({ message: "Nenhuma linha encontrada na direção correta para o seu trajeto." });
         }
+        // --- FIM DO BLOCO DE INTEGRAÇÃO ---
 
     } catch (error) {
         console.error("Erro ao planejar viagem:", error);
